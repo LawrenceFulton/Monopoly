@@ -6,13 +6,9 @@ public class Board {
     private Field[] fieldArray = new Field[40];
 
     public Board() {
-        System.out.println("DEBUG#6");
         this.fieldArray[0] = new Go();
-        System.out.println("DEBUG#7");
         this.fieldArray[1] = new Street("Old Kent Road", 60, "brown",2,10,30,90,160,250);
-        System.out.println("DEBUG#8");
         this.fieldArray[2] = new Chance();
-        System.out.println("DEBUG#5");
         this.fieldArray[3] = new Street("Whitechapel Road", 60, "brown",4,20,60,180,320,450);
         this.fieldArray[4] = new Tax(200);
         this.fieldArray[5] = new Station("King Cross Station");
@@ -55,15 +51,15 @@ public class Board {
 
 
     public String getNameOfField (int position) {
-        System.out.println("debug");
         Field field = fieldArray[position];
-        System.out.println("debug #3");
-
         return fieldArray[position].getName();
     }
 
+    public Field[] getFieldArray() {
+        return fieldArray;
+    }
+
     public Player getOwner (int position) {
-        System.out.println("debug#5");
         Field field = fieldArray[position];
         if(field instanceof Street) {
             return ((Street) field).getOwner();
@@ -86,7 +82,7 @@ public class Board {
 
     public boolean hasOwner (int position) {
         // if the propetry has an owner
-        System.out.println("Debug#4");
+
         Player owner = getOwner(position);
 
         if (owner.getName().equals("Bank")) {
@@ -110,8 +106,8 @@ public class Board {
         return false;
     }
 
-    public void arriveOnField(int position, Player player, int dice) {
-        Scanner scanner = new Scanner(System.in);
+    public void arriveOnField(int position, Player player, int dice, Scanner scanner) {
+
         Field field = fieldArray[position];
         int change=0;
 
@@ -120,17 +116,19 @@ public class Board {
         }else if (field instanceof Chance){
             player.increaseMoney(((Chance) field).pullCard());
         } else if (field instanceof Tax){
-            player.increaseMoney(((Tax) field).getPrice());
+            int tax = ((Tax) field).getPrice();
+            System.out.println("You payed " + tax +" tax");
+            player.increaseMoney(-tax);
         } else if (field instanceof Street) {
             if (this.hasOwner(field)){
                 ((Street) field).renting(player);
-                System.out.println("Player"+ player + "had to pay rent");
+                System.out.println("Player"+ player.getName() + "had to pay rent");
             }else{
-                System.out.println(player+" You want to buy following property:"+field.getName()+ "with price "
+                System.out.println(player.getName()+" You want to buy following property:"+field.getName()+ "with price "
                         + ((Street) field).getBuyingPrice()+ "(Y/N)");
                 String line = scanner.nextLine();
                 while (!line.equals("Y") && !(line.equals("N"))) {
-                    System.out.println("please enter 'y' or 'n'");
+                    System.out.println("please enter 'Y' or 'N'");
                     line = scanner.nextLine();
                 }
                 if (line.equals("Y")){
@@ -144,11 +142,11 @@ public class Board {
             if(this.hasOwner(field)){
                 ((Municipality) field).payRent(player,dice);
             } else {
-                System.out.println(player+" You want to buy following property:"+field.getName()+ "with price "
+                System.out.println(player.getName()+" You want to buy following property:"+field.getName()+ "with price "
                         + ((Municipality) field).getPrice()+ "(Y/N)");
                 String line = scanner.nextLine();
                 while (!line.equals("Y") && !(line.equals("N"))) {
-                    System.out.println("please enter 'y' or 'n'");
+                    System.out.println("please enter 'Y' or 'N'");
                     line = scanner.nextLine();
                 }
                 if (line.equals("Y")){
@@ -162,11 +160,11 @@ public class Board {
             if (hasOwner(field)) {
                 ((Station) field).payRent(player);
             } else {
-                System.out.println(player+" You want to buy following property:"+field.getName()+ "with price "
+                System.out.println(player.getName()+" You want to buy following property:"+field.getName()+ "with price "
                         + ((Station) field).getPrice()+ "(Y/N)");
                 String line = scanner.nextLine();
                 while (!line.equals("Y") && !(line.equals("N"))) {
-                    System.out.println("please enter 'y' or 'n'");
+                    System.out.println("please enter 'Y' or 'N'");
                     line = scanner.nextLine();
                 }
                 if (line.equals("Y")) {

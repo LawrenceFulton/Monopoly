@@ -8,7 +8,6 @@ public  class Field {
     }
 
     public String getName() {
-        System.out.println("debug#2");
         return name;
     }
 }

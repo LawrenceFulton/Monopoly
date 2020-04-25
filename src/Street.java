@@ -17,9 +17,7 @@ public class Street extends Field implements Buyable {
         this.buyingPrice = buyingPrice;
         this.houses = 0;
         this.colour =colour;
-        System.out.println("DEBUG#8");
         this.owner = new Bank();
-        System.out.println("DEBUG#9");
         this.p0 = p0;
         this.p1 = p1;
         this.p2 = p2;

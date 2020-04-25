@@ -6,10 +6,9 @@ public class Main {
        Player[] playerArray = new Player[numberOfPlayer];
         System.out.println(numberOfPlayer);
         for (int i = 0; i < numberOfPlayer; i++) {
-            System.out.println(i);
+            System.out.println("Player "+(i+1));
             playerArray[i] = new Player();
         }
-        System.out.println("DEBUG#2");
         return playerArray;
     }
 
@@ -17,21 +16,19 @@ public class Main {
         Player[] players;
         System.out.println("How many people are playing?");
         Scanner scanner = new Scanner(System.in);
-        String line;
-        int numberOfPlayer = scanner.nextInt();
+        String line = scanner.nextLine();
+        int numberOfPlayer =  Integer.parseInt(line);
         players = initPlayers(numberOfPlayer);
-        System.out.println("DEBUG#3");
         Dice dice = new Dice();
 	// write your code here
 
-        System.out.println("DEBUG#4");
         Board board = new Board();
 
-        System.out.println("DEBUG#1");
         while (true) {
             for (Player player : players ) {
-                int position = player.getPosition();
                 System.out.println("It's the turn of "+ player.getName());
+                player.getStats();
+                int position = player.getPosition();
                 dice.roll();
                 System.out.println("You rolled a "+ dice.getCombinedDice());
                 position +=  dice.getCombinedDice();
@@ -43,15 +40,12 @@ public class Main {
                 System.out.println("You proceded to position "+ position );
                 System.out.println("You are on field "+ board.getNameOfField(position));
 
-                board.arriveOnField(position,player,dice.getCombinedDice());
-/*
-                System.out.println("has owner: "+ board.hasOwner(position));
-*/
-
+                board.arriveOnField(position, player, dice.getCombinedDice(), scanner);
+                player.trade(scanner,board);
             }
-            System.out.println("You want to proceed? type 'yes'");
+            System.out.println("You want to proceed? type 'yes' if the case else 'no'");
             line = scanner.nextLine();
-            if (!line.equals("yes")) {
+            if (line.equals("no")) {
                 System.exit(1);
             }
         }
