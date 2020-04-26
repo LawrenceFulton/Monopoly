@@ -1,4 +1,4 @@
-public class Street extends Field implements Buyable {
+public class Street extends Field implements Buyable{
     private final int buyingPrice;
     private int houses;
     private final String colour;
@@ -34,6 +34,9 @@ public class Street extends Field implements Buyable {
     public Player getOwner() {
         return owner;
     }
+    public int getHouses(){
+        return houses;
+    }
 
     public int getBuyingPrice() {
         return buyingPrice;
@@ -63,5 +66,15 @@ public class Street extends Field implements Buyable {
         owner.increaseMoney(rent);
         player.increaseMoney(-rent);
     }
+
+    public String getColour() {
+        return colour;
+    }
+    public void addHouse() {
+        houses++;
+    }
+
+
+
 
 }

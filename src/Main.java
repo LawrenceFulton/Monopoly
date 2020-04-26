@@ -42,6 +42,7 @@ public class Main {
 
                 board.arriveOnField(position, player, dice.getCombinedDice(), scanner);
                 player.trade(scanner,board);
+                player.buildApartmani(scanner);
             }
             System.out.println("You want to proceed? type 'yes' if the case else 'no'");
             line = scanner.nextLine();

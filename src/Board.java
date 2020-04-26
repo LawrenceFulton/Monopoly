@@ -33,20 +33,20 @@ public class Board {
         this.fieldArray[23] = new Street("Fleet Street", 220, "red",18, 90,250,700,875,1050);
         this.fieldArray[24] = new Street("Trafalgar Square", 240, "red",20,100,300,750,925,1100);
         this.fieldArray[25] = new Station("Fenchurch St. Station");
-        this.fieldArray[26] = new Street("Leicester Square", 260, "Yellow", 22,110,330,800,975, 1150);
-        this.fieldArray[27] = new Street("Coventry Street", 260, "Yellow", 22,110,330,800,975, 1150);
+        this.fieldArray[26] = new Street("Leicester Square", 260, "yellow", 22,110,330,800,975, 1150);
+        this.fieldArray[27] = new Street("Coventry Street", 260, "yellow", 22,110,330,800,975, 1150);
         this.fieldArray[28] = new Municipality("Electrical Municipality");
-        this.fieldArray[29] = new Street("Piccadilly", 280, "Yellow", 24, 120,200,850,1025,1200);
+        this.fieldArray[29] = new Street("Piccadilly", 280, "yellow", 24, 120,200,850,1025,1200);
         this.fieldArray[30] = new Field();
-        this.fieldArray[31] = new Street("Regrent Street", 300, "Green", 26,130, 390,900,1100, 1275);
-        this.fieldArray[32] = new Street("Oxford Street", 300, "Green", 26,130, 390,900,1100, 1275);
+        this.fieldArray[31] = new Street("Regrent Street", 300, "green", 26,130, 390,900,1100, 1275);
+        this.fieldArray[32] = new Street("Oxford Street", 300, "green", 26,130, 390,900,1100, 1275);
         this.fieldArray[33] = new Chance();
-        this.fieldArray[34] = new Street("Bond Street", 300, "Green", 28,150,450,1000,1200, 1400);
+        this.fieldArray[34] = new Street("Bond Street", 300, "green", 28,150,450,1000,1200, 1400);
         this.fieldArray[35] = new Station("Liverpool St. Station");
         this.fieldArray[36] = new Chance();
-        this.fieldArray[37] = new Street("Park Lane", 350, "Blue", 35, 175, 500, 1100, 1300, 1500);
+        this.fieldArray[37] = new Street("Park Lane", 350, "darkBlue", 35, 175, 500, 1100, 1300, 1500);
         this.fieldArray[38] = new Tax(100);
-        this.fieldArray[39] = new Street("May Fair", 350, "Blue", 50, 200,600,1400, 1700, 2000);
+        this.fieldArray[39] = new Street("May Fair", 350, "darkBlue", 50, 200,600,1400, 1700, 2000);
     }
 
 

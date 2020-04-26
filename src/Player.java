@@ -2,6 +2,7 @@ import java.io.FileInputStream;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
 
 public class Player {
     private String name;
@@ -105,6 +106,135 @@ public class Player {
         }
 
     }
+    public void buildApartmani (Scanner scanner) {
+        int[] colours = {2,3,3,3,3,3,3,2};
+        for (Field street : streets) {
+            if (street instanceof Street) {
+                switch (((Street) street).getColour()){
+                    case "brown":
+                        colours[0]--;
+                        break;
+                    case "lightBlue":
+                        colours[1]--;
+                        break;
+                    case "pink":
+                        colours[2]--;
+                        break;
+                    case "orange":
+                        colours[3]--;
+                        break;
+                    case "red":
+                        colours[4]--;
+                        break;
+                    case "yellow":
+                        colours[5]--;
+                        break;
+                    case "green":
+                        colours[6]--;
+                        break;
+                    case "darkBlue":
+                        colours[7]--;
+                        break;
+                    default:
+                        System.out.println("There is a problem in the colours");
+                }
+            }
+        }
+        int decision;
+
+        for (int i =0; i < 8; i++){
+            if (colours[i] == 0){
+                switch (i){
+                    case 1:
+                        System.out.println("You have all brown buildings. Apartments cost 500. How many do you "+
+                                "want to build?");
+                        decision = scanner.nextInt();
+                        money -= decision * 500;
+                        addHouses("brown", decision);
+                        break;
+                    case 2:
+                        System.out.println("You have all light blue buildings. Apartments cost 500. How many do you "+
+                                "want to build?");
+                        decision = scanner.nextInt();
+                        money -= decision * 500;
+                        addHouses("lightBlue", decision);
+                        break;
+                    case 3:
+                        System.out.println("You have all pink buildings. Apartments cost 1000. How many do you "+
+                                "want to build?");
+                        decision = scanner.nextInt();
+                        money -= decision * 1000;
+                        addHouses("pink", decision);
+                        break;
+                    case 4:
+                        System.out.println("You have all orange buildings. Apartments cost 1000. How many do you "+
+                                "want to build?");
+                        decision = scanner.nextInt();
+                        money -= decision * 1000;
+                        addHouses("orange", decision);
+                        break;
+                    case 5:
+                        System.out.println("You have all brown buildings. Apartments cost 1500. How many do you "+
+                                "want to build?");
+                        decision = scanner.nextInt();
+                        money -= decision * 1500;
+                        addHouses("red", decision);
+                        break;
+                    case 6:
+                        System.out.println("You have all brown buildings. Apartments cost 1500. How many do you "+
+                                "want to build?");
+                        decision = scanner.nextInt();
+                        money -= decision * 1500;
+                        addHouses("yellow", decision);
+                        break;
+                    case 7:
+                        System.out.println("You have all brown buildings. Apartments cost 2000. How many do you "+
+                                "want to build?");
+                        decision = scanner.nextInt();
+                        money -= decision * 2000;
+                        addHouses("green", decision);
+                        break;
+                    case 8:
+                        System.out.println("You have all blue buildings. Apartments cost 2000. How many do you "+
+                                "want to build?");
+                        decision = scanner.nextInt();
+                        money -= decision * 2000;
+                        addHouses("blue", decision);
+                        break;
+                }
+
+            }
+        }
+
+
+
+    }
+
+    /**
+     * Should only be used when the player has all the houses of one colour.
+     * @param colour
+     * @param houses the number of houses
+     */
+    private void addHouses (String colour, int houses) {
+        ArrayList<Street> oneColour = new ArrayList<Street>();
+        for (Field street : streets) {
+            if( street instanceof Street ){
+                if (((Street) street).getColour().equals(colour)){
+                    oneColour.add((Street)street);
+                }
+            }
+        }
+
+
+        Collections.sort(oneColour, new HouseSorter());
+        int pos = 0;
+        for (int i = 0; i < houses; i++){
+            pos = pos % oneColour.size();
+            oneColour.get(pos).addHouse();
+        }
+    }
+
+
 
     public void addProperty (Field  field){
         if (field instanceof Station){
