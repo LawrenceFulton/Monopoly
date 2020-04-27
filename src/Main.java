@@ -37,7 +37,7 @@ public class Main {
                     player.increaseMoney(100);
                 }
                 player.setPosition(position);
-                System.out.println("You proceded to position "+ position );
+                System.out.println("You proceed to position "+ position );
                 System.out.println("You are on field "+ board.getNameOfField(position));
 
                 board.arriveOnField(position, player, dice.getCombinedDice(), scanner);
