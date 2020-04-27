@@ -38,6 +38,9 @@ public class Player {
      * @param board To look around on the board
      */
     public void trade (Scanner scanner, Board board) {
+        int buyableObject = 0;
+
+
         System.out.println(name+ ", do you want to trade? (Y/N)");
         System.out.println("You have " + money + "available");
         String line = scanner.nextLine();
@@ -45,47 +48,51 @@ public class Player {
             System.out.println("Please enter (Y/N)");
             line = scanner.nextLine();
         }
+
         if (line.equals("Y")) {
             System.out.println("Which prop you want to buy?");
             for (Field field : board.getFieldArray()){
                 if (field instanceof Buyable) {
                     if ((!((Buyable) field).getOwner().getName().equals("Bank")  &&  !((Buyable) field).getOwner().getName().equals(this.name) ) ) {
-                        System.out.println(field.getName() + " which belongs to " + ((Buyable) field).getOwner().getName());
+                        System.out.println("'" + field.getName() + "' which belongs to " + ((Buyable) field).getOwner().getName());
+                        buyableObject = 1;
                     }
                 }
             }
-            System.out.println("Enter the name of the prop:");
+            if (buyableObject == 1) {
+                System.out.println("Enter the name of the prop:");
 
-            line = scanner.nextLine();
-            for (Field field: board.getFieldArray()){
-                if (field.getName().equals(line)){
-                    if (field instanceof Buyable) {
-                        Player ownerOfProp = (((Buyable) field).getOwner());
-                        System.out.println("This prop belongs to: " + ownerOfProp.getName());
-                        System.out.println("How much do you offer?");
-                        line = scanner.nextLine();
-                        int price = Integer.parseInt(line);
-                        System.out.println(ownerOfProp.getName() + " do you accept the offer of" + line + "? (Y/N)");
-                        line = scanner.nextLine();
-                        while (!line.equals("Y") && !line.equals("N")) {
-                            System.out.println("Please enter (Y/N)");
+                line = scanner.nextLine();
+                for (Field field : board.getFieldArray()) {
+                    if (field.getName().equals(line)) {
+                        if (field instanceof Buyable) {
+                            Player ownerOfProp = (((Buyable) field).getOwner());
+                            System.out.println("This prop belongs to: " + ownerOfProp.getName());
+                            System.out.println("How much do you offer?");
                             line = scanner.nextLine();
-                        }
-                        if (line.equals("Y")){
-                            this.increaseMoney(-price);
-                            ownerOfProp.increaseMoney(price);
-                            ((Buyable) field).setOwner(this);
-                            addProperty(field);
-                            System.out.println("New balance");
-                            System.out.println("  "+name + ": "+money);
-                            System.out.println("  "+ownerOfProp.getName()+ ": "+ ownerOfProp.getMoney());
-                        }else{
-                            System.out.println("No trade did happen!");
-                        }
+                            int price = Integer.parseInt(line);
+                            System.out.println(ownerOfProp.getName() + " do you accept the offer of" + line + "? (Y/N)");
+                            line = scanner.nextLine();
+                            while (!line.equals("Y") && !line.equals("N")) {
+                                System.out.println("Please enter (Y/N)");
+                                line = scanner.nextLine();
+                            }
+                            if (line.equals("Y")) {
+                                this.increaseMoney(-price);
+                                ownerOfProp.increaseMoney(price);
+                                ((Buyable) field).setOwner(this);
+                                addProperty(field);
+                                System.out.println("New balance");
+                                System.out.println("  " + name + ": " + money);
+                                System.out.println("  " + ownerOfProp.getName() + ": " + ownerOfProp.getMoney());
+                            } else {
+                                System.out.println("No trade did happen!");
+                            }
 
+                        }
                     }
                 }
-            }
+            }else System.out.println("Unfortunately there is no tradable object on the market right now.");
         }
 
     }
